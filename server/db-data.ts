@@ -120,7 +120,7 @@ export const BLOGS: any = {
     id: 11,
     description: 'CodeZetta',
     longDescription: 'Youtube channel that contain anything related to Javascript',
-    iconUrl: 'https://drive.google.com/file/d/1oA1-IP4HlzU-4GvD-nS4IQtjcXkbdFvv/view?usp=sharing',
+    iconUrl: 'https://i.ibb.co/wpmVjqC/youtube-01-1.jpg',
     category: 'ADVANCED',
     seqNo: 12,
     url: 'CodeZetta-course'
