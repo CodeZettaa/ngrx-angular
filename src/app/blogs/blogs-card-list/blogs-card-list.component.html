@@ -1,0 +1,32 @@
+
+
+<section *ngFor="let blog of blogs" class="blog-card mat-elevation-z10">
+
+   
+
+        <h2>{{blog.description}}</h2>
+
+
+    <img [src]="blog.iconUrl">
+
+        <p>{{blog.longDescription}}</p>
+
+    <div class="blog-actions">
+
+        <button class="btn" color="primary" [routerLink]="['/blogs', blog.url]">
+          <span class="pi pi-eye"></span>
+            VIEW
+        </button>
+
+      <button  class="btn edit" color="accent" (click)="editblog(blog)">
+        <span class="pi pi-pencil"></span>
+        EDIT
+      </button>
+
+      <button class="btn delete" color="warn" (click)="onDeleteblog(blog)">
+        <span class="pi pi-trash"></span>
+        DELETE
+      </button>
+
+</div>
+</section>

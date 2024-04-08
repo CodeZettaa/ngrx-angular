@@ -1,0 +1,71 @@
+
+
+.title {
+    text-align: center;
+    margin-right: 15px;
+
+}
+
+.blogs-panel {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+
+.counters {
+    display: flex;
+}
+
+.filler {
+    flex: 1 1 auto;
+}
+
+h2 {
+  font-family: "Roboto";
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+.addBlog {
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+
+.spinner-container {
+  margin-top: 100px;
+}
+
+::ng-deep {
+  
+  .p-tabview {
+    .p-tabview-panels {
+      background-color: transparent !important;
+      color: white;
+    }
+    .p-tabview-nav {
+      justify-content: center;
+      background-color: transparent;
+      border: none;
+      li {
+        .p-tabview-nav-link  {
+          background-color: transparent;
+          .p-tabview-title {
+            color: #fff;
+          }
+        }
+        &.p-highlight .p-tabview-nav-link {
+          color: #a855f7;
+          border-color: #a855f7;
+          .p-tabview-title {
+            color: #a855f7;
+          }
+        }
+      }
+    }
+  }
+}

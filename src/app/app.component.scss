@@ -1,0 +1,31 @@
+.menu-list {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    list-style: none;
+    li {
+        margin-bottom: 1rem;
+        a {
+            text-decoration: none;
+            cursor: pointer;
+            span {
+                display: inline-block;
+                margin-inline-end: 1rem;
+            }
+            &.active {
+                color: #a855f7;
+            }
+        }
+        
+    }
+}
+.menu-button {
+    ::ng-deep {
+        .p-button.p-button-icon-only {
+            background-color: #a855f7;
+            border-color:#a855f7;
+            color: white;
+        }
+    }
+}
+

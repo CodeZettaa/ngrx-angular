@@ -1,0 +1,83 @@
+<!-- <h2 mat-dialog-title>{{dialogTitle}}</h2> -->
+
+
+
+<p-dialog [header]="dialogTitle" [(visible)]="state" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false"
+  [resizable]="false">
+
+
+
+  <!-- <ng-template [ngIf]="form"> -->
+  <div class="spinner-container" *ngIf="loading$ | async">
+
+    <mat-spinner></mat-spinner>
+
+  </div>
+
+
+  <ng-container [formGroup]="form">
+
+    <div class="form-group">
+      <label for="">Blog Description</label>
+      <input type="text" pInputText placeholder="blog Description" formControlName="description" />
+    </div>
+
+
+    <ng-container *ngIf="mode == 'create'">
+
+      <div class="form-group">
+        <label for="">Blog Url</label>
+
+        <input type="text" pInputText placeholder="blog Url" formControlName="url" />
+      </div>
+      <div class="form-group">
+        <label for="">Blog Icon Url</label>
+
+        <input type="text" pInputText placeholder="blog Icon Url" formControlName="iconUrl" />
+      </div>
+    </ng-container>
+    <div class="form-group">
+      <label for="Promotion On">Category</label>
+
+
+    <p-selectButton [options]="stateOptions" formControlName="category" optionLabel="label"
+      optionValue="value"></p-selectButton>
+
+</div>
+
+    <div class="form-group">
+      <label for="Promotion On">Promotion On</label>
+      <p-toggleButton formControlName="promo" onLabel="Yes" offLabel="No" onIcon="pi pi-check" offIcon="pi pi-times"
+        [style]="{ width: '10em' }"></p-toggleButton>
+    </div>
+
+
+
+  <div class="form-group">
+    <label for="">Description</label>
+    <textarea rows="5" cols="30" pInputTextarea formControlName="longDescription"></textarea>
+  </div>
+
+
+  </ng-container>
+  <!-- </ng-template> -->
+
+</p-dialog>
+
+
+
+
+<!-- 
+<mat-dialog-actions>
+
+  <button mat-raised-button (click)="onClose()">
+    Close
+  </button>
+
+  <button mat-raised-button color="primary"
+          [disabled]="!form?.valid || (this.loading$ | async)"
+          (click)="onSave()">
+    Save
+  </button>
+
+</mat-dialog-actions> -->

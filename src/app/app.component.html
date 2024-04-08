@@ -1,0 +1,43 @@
+<!-- <mat-sidenav-container fullscreen> -->
+
+    <p-button (click)="sidebarVisible = true" class="menu-button" icon="pi pi-arrow-right"></p-button>
+    <p-sidebar [(visible)]="sidebarVisible">
+      <ul class="menu-list">
+        <li>
+            <a  routerLink="/blogs" routerLinkActive="'active'">
+                <span class="pi pi-list"></span>
+                <span>blogs</span>
+            </a>
+        </li>
+        <li *ngIf="isLoggedOut$ | async">
+            <a  routerLink="/login" routerLinkActive="'active'">
+                <span class="pi pi-sign-in"></span>
+                <span>Login</span>
+            </a>
+        </li>
+        <li  *ngIf="isLoggedIn$ | async">
+
+        <a   (click)="logout()">
+            <span class="pi pi-sign-out"></span>
+             <span>Logout</span>
+         </a>
+        </li>
+      </ul>
+  </p-sidebar>
+
+
+    <!-- <mat-toolbar color="primary">
+        <button class="menu-button" mat-icon-button (click)="start.open('mouse')">
+            <mat-icon>menu</mat-icon>
+        </button>
+    </mat-toolbar> -->
+
+  <div class="spinner-container" *ngIf="loading">
+
+    <mat-spinner></mat-spinner>
+
+  </div>
+
+    <router-outlet></router-outlet>
+
+<!-- </mat-sidenav-container> -->

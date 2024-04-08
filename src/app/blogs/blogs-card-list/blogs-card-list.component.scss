@@ -1,0 +1,35 @@
+
+
+.blog-card {
+    margin: 20px 10px;
+    img {
+      width: 100%;
+    }
+}
+
+.blog-actions {
+    display: flex;
+    justify-content: center;
+}
+
+.blog-actions button {
+  margin-right: 5px;
+  border: none;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 12px;
+  display: flex;
+  span {
+    margin-inline-end: 5px;
+    display: inline-block;
+  }
+  &.delete {
+    background-color: #551c18;
+    color: white;
+  }
+  &.edit {
+    background-color: #67A07A;
+    color: white;
+  }
+}
+

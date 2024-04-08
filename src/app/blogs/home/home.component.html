@@ -1,0 +1,40 @@
+<div class="blogs-panel">
+
+  <div class="header">
+
+    <h2 class="title">All Blogs</h2>
+
+    <p-button class="addBlog" (click)="onAddBlog()" icon="pi pi-plus" [rounded]="true" [text]="true" [raised]="true" severity="help "></p-button>
+
+
+  </div>
+
+  <div class="counters">
+    <p>In Promo: {{promoTotal$ | async}}</p>
+  </div>
+
+
+
+
+  <p-tabView>
+    <p-tabPanel header="Beginners">
+      <blogs-card-list (blogChanged)="reload()"
+      [blogs]="beginnerBlog$ | async">
+
+    </blogs-card-list>
+    </p-tabPanel>
+    <p-tabPanel header="Advanced">
+      <blogs-card-list  (blogChanged)="reload()"
+      [blogs]="advancedBlog$ | async"
+
+    ></blogs-card-list>
+    </p-tabPanel>
+
+</p-tabView>
+</div>
+
+
+
+
+
+<section blog-dialog [state]="toggleAddBlog" [mode]="'create'"></section>

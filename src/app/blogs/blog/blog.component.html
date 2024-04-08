@@ -1,0 +1,35 @@
+<div class="blog" *ngIf="(blog$ | async) as blog">
+
+  <h2>{{blog?.description}}</h2>
+
+  <img class="blog-thumbnail mat-elevation-z8" [src]="blog?.iconUrl">
+
+  <div class="spinner-container" *ngIf="(loading$ | async )">
+
+    <mat-spinner></mat-spinner>
+
+  </div>
+
+  <p-table [value]="lessons$ | async" class="p-datatable-striped header">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>#</th>
+            <th>Description</th>
+            <th>Duration</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+        <tr class="bg-dark">
+            <td>{{ product.seqNo }}</td>
+            <td>{{ product.description }}</td>
+            <td>{{ product.duration }}</td>
+        </tr>
+    </ng-template>
+</p-table>
+
+
+
+  <button class="bottom-toolbar" 
+          (click)="loadLessonsPage(blog)">Load More</button>
+
+</div>
