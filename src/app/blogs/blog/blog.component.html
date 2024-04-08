@@ -27,3 +27,8 @@
           (click)="loadLessonsPage(blog)">Load More</button>
 
 </div>
+
+<div class="loader" *ngIf="!(loading$ | async )" >
+
+    <p-progressSpinner styleClass="w-4rem h-4rem" strokeWidth="8"  animationDuration=".5s"></p-progressSpinner>
+  </div>

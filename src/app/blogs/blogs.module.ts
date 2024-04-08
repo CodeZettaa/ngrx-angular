@@ -16,6 +16,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { TableModule } from 'primeng/table';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 export const blogsRoutes: Routes = [
     {
@@ -41,7 +42,8 @@ export const blogsRoutes: Routes = [
         SelectButtonModule,
         ToggleButtonModule,
         InputTextareaModule,
-        TableModule
+        TableModule,
+        ProgressSpinnerModule
     ],
     declarations: [
         HomeComponent,

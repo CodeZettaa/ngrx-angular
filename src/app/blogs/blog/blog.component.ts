@@ -42,6 +42,8 @@ export class BlogComponent implements OnInit {
             tap(console.log)
           );
 
+          this.loading$ = this.blog$.pipe(map(blog => !!blog));
+
     }
 
     loadLessonsPage(blog: Blog) {

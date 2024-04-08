@@ -33,8 +33,10 @@
 </p-tabView>
 </div>
 
+<div class="loader" *ngIf="!(loading$ | async )" >
 
-
+  <p-progressSpinner styleClass="w-4rem h-4rem" strokeWidth="8"  animationDuration=".5s"></p-progressSpinner>
+</div>
 
 
 <section blog-dialog [state]="toggleAddBlog" [mode]="'create'"></section>
