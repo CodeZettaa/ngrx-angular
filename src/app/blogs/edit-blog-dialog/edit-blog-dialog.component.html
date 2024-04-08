@@ -1,7 +1,7 @@
 
 
 
-<p-dialog [header]="dialogTitle" [(visible)]="state" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false"
+<p-dialog [header]="dialogTitle" (onHide)="close()" [(visible)]="state" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false"
   [resizable]="false">
 
 
@@ -48,6 +48,9 @@
     <label for="">Description</label>
     <textarea rows="5" cols="30" pInputTextarea formControlName="longDescription"></textarea>
   </div>
+
+
+  <button class="bottom-toolbar" (click)="onSave()">Save</button>
 
 
   </ng-container>

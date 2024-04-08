@@ -12,9 +12,12 @@ export class BlogsCardListComponent implements OnInit {
     @Input()
     blogs: Blog[];
 
+    currentBlog:Blog
+
     @Output()
     blogChanged = new EventEmitter();
 
+    toggleAddBlog:boolean = false
     constructor(
       ) {
     }
@@ -24,7 +27,8 @@ export class BlogsCardListComponent implements OnInit {
     }
 
     editblog(blog:Blog) {
-
+      this.currentBlog= blog
+      this.toggleAddBlog = !this.toggleAddBlog
 
     }
 
@@ -32,6 +36,13 @@ export class BlogsCardListComponent implements OnInit {
 
   }
 
+
+  close(isCalled?) {    
+    if(isCalled) {
+      this.blogChanged.emit()
+    }
+    this.toggleAddBlog = false
+  }
 }
 
 

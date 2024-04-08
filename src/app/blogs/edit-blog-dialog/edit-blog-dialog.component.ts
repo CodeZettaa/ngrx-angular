@@ -1,5 +1,5 @@
-import {ChangeDetectionStrategy, Component, Inject, Input} from '@angular/core';
-import {FormControl, FormGroup, UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
+import {ChangeDetectionStrategy, Component, EventEmitter, Inject, Input, OnChanges, OnInit, Output} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Observable} from 'rxjs';
 import { Blog } from '../model/blog';
 import { BlogsHttpService } from '../services/blogs-http.service';
@@ -10,8 +10,10 @@ import { BlogsHttpService } from '../services/blogs-http.service';
     styleUrls: ['./edit-blog-dialog.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EditBlogDialogComponent {
-    @Input() state: boolean
+export class EditBlogDialogComponent implements OnChanges {
+    @Input() state: any
+    @Input() blog: Blog 
+
 
     form  = new FormGroup( {
         description: new FormControl('',[Validators.required]),
@@ -24,12 +26,12 @@ export class EditBlogDialogComponent {
 
     dialogTitle: string;
 
-    blog: Blog;
-
     @Input() mode: 'create' | 'update';
 
     loading$: Observable<boolean>;
     visible: boolean = false;
+
+    @Output() closeModel: EventEmitter<any> = new EventEmitter<any>(null)
 
     stateOptions: any[] = [
         { label: 'BEGINNER', value: 'BEGINNER' },
@@ -39,27 +41,43 @@ export class EditBlogDialogComponent {
     ];
 
     constructor(
-        private fb: UntypedFormBuilder,
-
         private blogsService: BlogsHttpService) {
     }
 
+    ngOnChanges(): void {        
+        if(this.blog && this.mode == 'update') {
+            this.form.patchValue({
+                'category':this.blog.category,
+                'description':this.blog.description,
+                'longDescription':this.blog.longDescription,
+                'url':this.blog.url,
+                'iconUrl':this.blog.iconUrl,
+                'promo':this.blog.promo,
+
+
+
+            })
+        }
+    }
     onClose() {
     }
 
     onSave() {
-
         const blog: Blog = {
             ...this.blog,
             ...this.form.value
           };
       
           this.blogsService.saveBlog(blog.id, blog)
-            .subscribe()
-      
-
+            .subscribe({
+                next:() => {
+                    this.close('called')
+                }
+            })
 
     }
-
+    close(state?) {
+        this.closeModel.emit(state)
+    }
 
 }
