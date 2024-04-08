@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
+import {FormControl, FormGroup, UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 
 import {Store} from "@ngrx/store";
 
@@ -8,8 +8,6 @@ import {tap} from "rxjs/operators";
 import {noop} from "rxjs";
 import {Router} from "@angular/router";
 import {AppState} from '../../reducers';
-import {login} from '../auth.actions';
-import {AuthActions} from '../action-types';
 
 @Component({
   selector: 'login',
@@ -18,18 +16,16 @@ import {AuthActions} from '../action-types';
 })
 export class LoginComponent implements OnInit {
 
-  form: UntypedFormGroup;
+  form: FormGroup= new  FormGroup({
+    email: new FormControl('ngrx@codezetta.com', [Validators.required]),
+    password: new FormControl('test', [Validators.required])
+});;
 
   constructor(
       private fb:UntypedFormBuilder,
       private auth: AuthService,
-      private router:Router,
-      private store: Store<AppState>) {
+      private router:Router,) {
 
-      this.form = fb.group({
-          email: ['ngrx@codezetta.com', [Validators.required]],
-          password: ['test', [Validators.required]]
-      });
 
   }
 
@@ -38,28 +34,6 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-
-      const val = this.form.value;
-
-      this.auth.login(val.email, val.password)
-          .pipe(
-              tap(user => {
-
-                  console.log(user);
-
-                  this.store.dispatch(login({user}));
-
-                  this.router.navigateByUrl('/blogs');
-
-              })
-          )
-          .subscribe(
-              noop,
-              () => alert('Login Failed')
-          );
-
-
-
   }
 
 }

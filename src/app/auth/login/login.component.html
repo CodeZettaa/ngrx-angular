@@ -1,28 +1,23 @@
-<mat-card class="login-page">
-    <mat-card-title>Login</mat-card-title>
-    <mat-card-content>
+<section class="login-page">
+    <h2>Login</h2>
         <form [formGroup]="form" class="login-form">
 
-            <mat-form-field>
+            <div class="form-group">
 
-                <input matInput type="email"
-                       placeholder="Email"
-                       formControlName="email">
+                <input type="email"  placeholder="Email" pInputText formControlName="email" />
 
-            </mat-form-field>
 
-            <mat-form-field>
+            </div>
 
-                <input matInput type="password"
-                       placeholder="Password"
-                       formControlName="password">
+               
+            <div class="form-group">
+                <p-password formControlName="password" [toggleMask]="true"></p-password>
 
-            </mat-form-field>
 
-            <button mat-raised-button color="primary"
+                    </div>
+            <button class="btn"
                     (click)="login()"
                     [disabled]="!form.valid">Login</button>
 
         </form>
-    </mat-card-content>
-</mat-card>
+</section >

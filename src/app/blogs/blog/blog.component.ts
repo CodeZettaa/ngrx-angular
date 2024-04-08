@@ -3,9 +3,8 @@ import {ActivatedRoute} from '@angular/router';
 import {Observable, of} from 'rxjs';
 import {Lesson} from '../model/lesson';
 import {concatMap, delay, filter, first, map, shareReplay, tap, withLatestFrom} from 'rxjs/operators';
-import {LessonEntityService} from '../services/lesson-entity.service';
 import { Blog } from '../model/blog';
-import { BlogEntityService } from '../services/blog-entity.service';
+import { BlogsHttpService } from '../services/blogs-http.service';
 
 
 @Component({
@@ -27,45 +26,26 @@ export class BlogComponent implements OnInit {
     nextPage = 0;
 
     constructor(
-        private blogsService: BlogEntityService,
-        private lessonsService: LessonEntityService,
+        private blogServoive: BlogsHttpService,
         private route: ActivatedRoute) {
 
     }
 
     ngOnInit() {
 
-        const blogUrl = this.route.snapshot.paramMap.get('blogUrl');
+        const blogUrl = this.route.snapshot.paramMap.get("blogUrl");
 
-        this.blog$ = this.blogsService.entities$
-            .pipe(
-                map(blogs => blogs.find(blog => blog.url == blogUrl))
-            );
-
-        this.lessons$ = this.lessonsService.entities$
-            .pipe(
-                withLatestFrom(this.blog$),
-                tap(([lessons, blog]) => {
-                    if (this.nextPage == 0) {
-                        this.loadLessonsPage(blog);
-                    }
-                }),
-                map(([lessons, blog]) =>
-                    lessons.filter(lesson => lesson.blogId == blog.id))
-            );
-
-        this.loading$ = this.lessonsService.loading$.pipe(delay(0));
+        this.blog$ = this.blogServoive.findBlogByUrl(blogUrl);
+        
+        this.lessons$ = this.blog$.pipe(
+            concatMap(course => this.blogServoive.findLessons(course.id)),
+            tap(console.log)
+          );
 
     }
 
     loadLessonsPage(blog: Blog) {
-        this.lessonsService.getWithQuery({
-            'blogId': blog.id.toString(),
-            'pageNumber': this.nextPage.toString(),
-            'pageSize': '3'
-        });
 
-        this.nextPage += 1;
 
     }
 

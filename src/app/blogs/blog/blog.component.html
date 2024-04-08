@@ -2,13 +2,7 @@
 
   <h2>{{blog?.description}}</h2>
 
-  <img class="blog-thumbnail mat-elevation-z8" [src]="blog?.iconUrl">
-
-  <div class="spinner-container" *ngIf="(loading$ | async )">
-
-    <mat-spinner></mat-spinner>
-
-  </div>
+  <img class="blog-thumbnail" [src]="blog?.iconUrl">
 
   <p-table [value]="lessons$ | async" class="p-datatable-striped header">
     <ng-template pTemplate="header">

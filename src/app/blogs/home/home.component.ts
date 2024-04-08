@@ -1,10 +1,8 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {Blog} from '../model/blog';
+import {Blog, compareBlogs} from '../model/blog';
 import {Observable} from 'rxjs';
-// import { MatDialog } from '@angular/material/dialog';
-import {map} from 'rxjs/operators';
-import { BlogEntityService } from '../services/blog-entity.service';
-import { EditBlogDialogComponent } from '../edit-blog-dialog/edit-blog-dialog.component';
+import {map, shareReplay} from 'rxjs/operators';
+import { BlogsHttpService } from '../services/blogs-http.service';
 
 
 @Component({
@@ -22,9 +20,10 @@ export class HomeComponent implements OnInit {
     advancedBlog$: Observable<Blog[]>;
 
     toggleAddBlog:boolean = false
+    loading$: Observable<boolean>;
 
     constructor(
-      private blogsService: BlogEntityService) {
+      private blogsService: BlogsHttpService) {
 
     }
 
@@ -33,21 +32,30 @@ export class HomeComponent implements OnInit {
     }
 
   reload() {
+    const blogs$ = this.blogsService.findAllBlogs()
+    .pipe(
+      map(courses => courses.sort(compareBlogs)),
+      shareReplay()
+    );
 
-    this.beginnerBlog$ = this.blogsService.entities$
+  this.loading$ = blogs$.pipe(map(blog => !!blog));
+
+  this. beginnerBlog$ = blogs$
+    .pipe(
+      map(blogs => blogs.filter(blog => blog.category == 'BEGINNER'))
+    );
+
+
+  this.advancedBlog$ = blogs$
+    .pipe(
+      map(blogs => blogs.filter(blog => blog.category == 'ADVANCED'))
+    );
+
+  this.promoTotal$ = blogs$
       .pipe(
-        map(blogs => blogs.filter(blog => blog.category == 'BEGINNER'))
+          map(blogs => blogs.filter(blog => blog.promo).length)
       );
-
-    this.advancedBlog$ = this.blogsService.entities$
-      .pipe(
-        map(blogs => blogs.filter(blog => blog.category == 'ADVANCED'))
-      );
-
-    this.promoTotal$ = this.blogsService.entities$
-        .pipe(
-            map(blogs => blogs.filter(blog => blog.promo).length)
-        );
+  
 
   }
 

@@ -1,9 +1,8 @@
 import {ChangeDetectionStrategy, Component, Inject, Input} from '@angular/core';
-// import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {FormControl, FormGroup, UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {Observable} from 'rxjs';
 import { Blog } from '../model/blog';
-import { BlogEntityService } from '../services/blog-entity.service';
+import { BlogsHttpService } from '../services/blogs-http.service';
 
 @Component({
     selector: '[blog-dialog]',
@@ -42,56 +41,22 @@ export class EditBlogDialogComponent {
     constructor(
         private fb: UntypedFormBuilder,
 
-        private blogsService: BlogEntityService) {
-
-        // this.dialogTitle = data.dialogTitle;
-        // this.blog = data.blog;
-        // this.mode = data.mode;
-
-    
-
-        // if (this.mode == 'update') {
-        //     this.form = this.fb.group(formControls);
-        //     this.form.patchValue({...data.blog});
-        // } else if (this.mode == 'create') {
-            // this.form = this.fb.group({
-            //     ...formControls,
-            //     url: ['', Validators.required],
-            //     iconUrl: ['', Validators.required]
-            // });
-        // }
+        private blogsService: BlogsHttpService) {
     }
 
     onClose() {
-        // this.dialogRef.close();
     }
 
     onSave() {
 
-        // const blog: Blog = {
-        //     ...this.blog,
-        //     ...this.form.value
-        // };
-
-        // if (this.mode == 'update') {
-
-        //     this.blogsService.update(blog);
-
-        //     this.dialogRef.close();
-        // } else if (this.mode == 'create') {
-
-        //     this.blogsService.add(blog)
-        //         .subscribe(
-        //             newblog => {
-
-        //                 console.log('New blog', newblog);
-
-        //                 this.dialogRef.close();
-
-        //             }
-        //         );
-
-        // }
+        const blog: Blog = {
+            ...this.blog,
+            ...this.form.value
+          };
+      
+          this.blogsService.saveBlog(blog.id, blog)
+            .subscribe()
+      
 
 
     }
