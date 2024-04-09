@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
 
   this.loading$ = blogs$.pipe(map(blog => !!blog));
 
-  this. beginnerBlog$ = blogs$
+  this.beginnerBlog$ = blogs$
     .pipe(
       map(blogs => blogs.filter(blog => blog.category == 'BEGINNER'))
     );
