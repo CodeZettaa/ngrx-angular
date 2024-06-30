@@ -76,6 +76,6 @@ At certain points along the course, you will be asked to checkout other remote b
 
 We can checkout the remote branch and start tracking it with a local branch that has the same name, by using the following command:
 
-      git checkout -b start 
+      git checkout start 
 
 It's also possible to download a ZIP file for a given branch,  using the branch dropdown on this page on the top left, and then selecting the Clone or Download / Download as ZIP button.
