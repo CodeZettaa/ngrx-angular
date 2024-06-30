@@ -3,8 +3,6 @@
 
 This repository contains the code of the video course [Ngrx (with NgRx Data) - The Complete Guide](https://github.com/CodeZettaa/ngrx-angular).
 
-This course repository is updated to Angular v17:
-
 ![Ngrx (with NgRx Data) - The Complete Guide](https://i.ibb.co/9rrxcDW/ngrx.png)
 
 
@@ -66,6 +64,7 @@ The application is visible at port 4200: [http://localhost:4200](http://localhos
 
 
 # Important 
+This course collected from a lot of resource and main ones are NGRX decomentaion and Angular University course.
 
 This repository has multiple branches, have a look at the beginning of each section to see the name of the branch.
 
